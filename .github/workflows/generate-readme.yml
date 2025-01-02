@@ -1,0 +1,14 @@
+name: Generate README
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-readme:
+    uses: crislainesc/actions/.github/workflows/generate-readme.yml@main
+    secrets: inherit
+    with:
+      repo_name: ${{ github.repository }}
+      repo_owner: ${{ github.repository_owner }}
