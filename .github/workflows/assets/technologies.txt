@@ -1,2 +1,9 @@
-- **[Technology Example With link](https://nodejs.org/en)**
-- **Technology Example**
+- **Typescript**
+- **Jest**
+- **Swc**
+- **Sequelize**
+- **Ts Node**
+- **Tslint**
+- **Reflect Metadata**
+- **Sqlite 3**
+- **Uuid**
