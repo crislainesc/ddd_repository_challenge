@@ -1,6 +1,7 @@
 import Order from '../domain/entity/order';
 import OrderItem from '../domain/entity/order_item';
 import Product from '../domain/entity/product';
+import { v4 as uuid } from 'uuid';
 
 export const generateOrders = (
   totalOrders: number
@@ -10,14 +11,14 @@ export const generateOrders = (
   for (let i = 0; i < totalOrders; i++) {
     const orderNumber = i + 1;
     const order = new Order(
-      `${orderNumber}`,
+      uuid(),
       `Customer ${orderNumber}`,
       generateOrderItems(2).items
     );
     total += order.total();
     orders.push(order);
   }
-  return { orders, total };
+  return { orders: orders.sort((a, b) => a.id.localeCompare(b.id)), total };
 };
 
 export const generateOrderItems = (
@@ -32,16 +33,10 @@ export const generateOrderItems = (
     const price = itemNumber * 10;
     total += price * 2;
     items.push(
-      new OrderItem(
-        `${itemNumber}`,
-        `Item ${itemNumber}`,
-        price,
-        productId,
-        quantity
-      )
+      new OrderItem(uuid(), `Item ${itemNumber}`, price, productId, quantity)
     );
   }
-  return { items, total };
+  return { items: items.sort((a, b) => a.id.localeCompare(b.id)), total };
 };
 
 export const generateProducts = (
@@ -53,9 +48,7 @@ export const generateProducts = (
     const productNumber = i + 1;
     const price = productNumber * 10;
     total += price * 2;
-    products.push(
-      new Product(`${productNumber}`, `Product ${productNumber}`, price)
-    );
+    products.push(new Product(uuid(), `Product ${productNumber}`, price));
   }
   return { products, total };
 };

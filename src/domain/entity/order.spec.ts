@@ -33,4 +33,14 @@ describe('Order unit tests', () => {
       new Order('123', '123', generateOrderItems(2, -1).items);
     }).toThrow('Quantity must be greater than zero');
   });
+
+  it('should change items', () => {
+    const order = new Order('123', '123', items);
+    const { items: newItems, total: newTotal } = generateOrderItems(3);
+
+    order.changeItems(newItems);
+
+    expect(order.items).toStrictEqual(newItems);
+    expect(order.total()).toStrictEqual(newTotal);
+  });
 });
